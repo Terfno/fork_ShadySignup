@@ -1,0 +1,678 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  perspective: 1000000px;
+  font-family: "Montserrat";
+  background: #ccc;
+  --fieldWidth: red;
+  background: #74ebd5;
+  background: linear-gradient(45deg, #ACB6E5, #74ebd5);
+  overflow: hidden;
+}
+body .reset {
+  position: absolute;
+  left: 0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(180px) scale(0);
+  background: #000;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px;
+  margin: 0;
+  transition: 0.2s ease-in-out;
+}
+body .reset.dump {
+  transition-delay: 3s;
+  transform: translateX(-50%) translateY(180px) scale(1);
+}
+body * {
+  transform-style: preserve-3d;
+}
+body #wrap {
+  width: 500px;
+  height: 50px;
+  min-width: 500px;
+  position: relative;
+  background: #fff;
+}
+body #wrap:before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 380px;
+  left: calc(50% - 325px);
+  top: calc(50% - 200px);
+  box-shadow: 0 0 0 2px #000, 0 20px 0 -12px #000;
+  background: #fff;
+  transform-style: preserve-3d;
+  transform: translateZ(-50px);
+  z-index: -5;
+}
+body #wrap h1 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: -150px;
+}
+body #wrap label {
+  position: absolute;
+  font-size: 18px;
+  top: -25px;
+  font-weight: 900;
+  left: 0;
+  transition: 0.2s ease-in-out;
+}
+body #wrap label.dump {
+  opacity: 0;
+}
+body #wrap input.trash {
+  position: absolute;
+  width: 125px;
+  height: 50px;
+  right: 0;
+  color: #000;
+  background: #fff;
+  z-index: 9999;
+  transform-style: preserve-3d;
+  transform: translateZ(100px);
+  font-weight: 900;
+  background: #fff;
+  border: none;
+  box-shadow: inset 0 0 0 2px #000;
+  transition: 0.2s ease-in-out;
+  font-size: 22px;
+}
+body #wrap input.trash:hover {
+  background: repeating-linear-gradient(45deg, #000, #000 2px, #fff 2px, #fff 3px);
+  color: #fff;
+}
+body #wrap input.trash.dump {
+  display: none;
+}
+body #wrap input.rubbish {
+  position: absolute;
+  width: calc(100% - 125px);
+  height: 50px;
+  background: transparent;
+  box-sizing: border-box;
+  border: none;
+  padding: 10px;
+  font-family: "Montserrat";
+  font-size: 22px;
+  z-index: 9;
+  outline: none;
+}
+body #wrap input.rubbish.dump {
+  opacity: 0;
+}
+body #wrap input.rubbish:focus, body #wrap input.rubbish:active {
+  outline: none;
+}
+body #wrap input.rubbish.dump {
+  z-index: -1;
+  pointer-events: none;
+}
+body #wrap .field {
+  pointer-events: none;
+  height: 50px;
+  width: calc(100% - 125px);
+  box-shadow: inset 0 -2px 0 0 #000;
+  position: relative;
+}
+body #wrap .field p {
+  position: absolute;
+  width: auto;
+  font-size: 22px;
+  top: -7.5px;
+  left: 0;
+  padding-left: 10px;
+  line-height: 1;
+  transition: 0.65s ease-out;
+  transition-delay: 1.5s;
+}
+body #wrap .field p span.whitespace {
+  display: inline-block;
+  width: 0px;
+}
+body #wrap .field p span.char {
+  transform: translateX(0px) skewX(0);
+}
+body #wrap .field .left {
+  position: absolute;
+  height: 50px;
+  width: 2px;
+  box-shadow: inset -2px 0 0 #000000;
+  left: -1px;
+  transform-origin: 50% 99%;
+}
+body #wrap .field .left .top {
+  position: absolute;
+  width: 376px;
+  height: 2px;
+  top: 0px;
+  box-shadow: inset 0 2px 0 0 #000;
+  transform-origin: 1px 50%;
+}
+body #wrap .field .left .top:before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 1.75px;
+  background: #000;
+  top: 0;
+  right: -50px;
+  transform-origin: left;
+  transform: rotate(90deg);
+}
+body #wrap .field.dump {
+  animation: turn 1.5s ease-out 1 forwards;
+  transform-origin: right;
+  z-index: 9;
+}
+@keyframes turn {
+  90% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+body #wrap .field.dump .left {
+  animation: turn1 1.5s ease-in-out 1 forwards;
+}
+@keyframes turn1 {
+  25% {
+    transform: rotate(-135deg);
+  }
+  50% {
+    transform: rotate(-145deg);
+  }
+  70% {
+    transform: rotate(-125deg);
+  }
+  80% {
+    transform: rotate(-135deg);
+  }
+  100% {
+    transform: rotate(-191.5deg);
+  }
+}
+body #wrap .field.dump .top {
+  animation: turn2 1.5s ease-in-out 1 forwards;
+}
+@keyframes turn2 {
+  25% {
+    transform: rotate(-175deg);
+    width: 50px;
+  }
+  40% {
+    transform: rotate(-195deg);
+    width: 75px;
+  }
+  60% {
+    transform: rotate(-185deg);
+    width: 100px;
+  }
+  70% {
+    transform: rotate(-192.5deg);
+    width: 130px;
+  }
+  90% {
+    transform: rotate(-190deg);
+    width: 130px;
+  }
+  100% {
+    transform: rotate(-90deg);
+    width: 130px;
+  }
+}
+body #wrap .field.dump .top:before {
+  animation: turn3 1.5s ease-in-out 1 forwards;
+}
+@keyframes turn3 {
+  30% {
+    transform: rotate(90deg);
+  }
+  45% {
+    transform: rotate(30deg);
+  }
+  60% {
+    transform: rotate(-20deg);
+  }
+  75% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+body #wrap .field.dump p span {
+  display: inline-block !important;
+}
+body #wrap .field.dump p span.word {
+  animation: drop 0.2s ease-in-out 1 forwards;
+  animation-delay: 2.15s;
+}
+@keyframes drop {
+  to {
+    transform: translateY(100px);
+  }
+}
+body #wrap .field.dump p span.char.sliding {
+  color: transparent;
+}
+body #wrap .field.dump p span.char.sliding:before {
+  content: attr(data-char);
+  position: absolute;
+  font-size: inherit;
+  color: #000;
+  animation: roll 2s ease-in forwards;
+  animation-delay: 1.4s;
+}
+@keyframes roll {
+  to {
+    transform: rotate(2160deg);
+  }
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(1) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 12.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(2) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 25px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(3) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 37.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(4) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 50px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(5) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 62.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(6) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 75px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(7) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 87.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(8) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 100px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(9) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 112.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(10) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 125px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(11) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 137.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(12) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 150px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(13) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 162.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(14) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 175px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(15) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 187.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(16) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 200px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(17) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 212.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(18) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 225px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(19) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 237.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(20) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 250px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(21) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 262.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(22) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 275px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(23) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 287.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(24) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 300px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(25) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 312.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(26) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 325px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(27) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 337.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(28) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 350px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(29) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 362.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(30) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 375px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(31) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 387.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(32) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 400px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(33) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 412.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(34) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 425px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(35) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 437.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(36) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 450px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(37) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 462.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(38) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 475px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(39) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 487.5px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .field.dump p span.char.sliding:nth-of-type(40) {
+  display: inline-block;
+  transition: transform 0.7s ease-in;
+  transition-delay: 1.4s;
+  transform: translateX(calc((var(--fieldWidth) - 500px) - var(--fieldWidth))) skewX(0deg);
+}
+body #wrap .can {
+  position: absolute;
+  width: 125px;
+  height: 50px;
+  right: 0;
+  top: 0;
+  z-index: 9;
+}
+body #wrap .can:before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/383755/racoon.svg");
+  background-size: contain;
+  top: -50px;
+  left: 75px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateY(45px) rotate(-90deg) scale(0.75);
+}
+body #wrap .can.dump:hover .inner .face:nth-of-type(4) .back {
+  background: #fff;
+}
+body #wrap .can .inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+body #wrap .can.dump {
+  animation: fall 1s ease-out 1 forwards;
+  transform-origin: 0% 100%;
+}
+body #wrap .can.dump:before {
+  transition: 0.5s ease-in-out;
+  transition-delay: 2.75s;
+}
+@keyframes fall {
+  20% {
+    transform: rotate(93deg);
+  }
+  26% {
+    transform: rotate(88deg);
+  }
+  32% {
+    transform: rotate(91deg);
+  }
+  40% {
+    transform: rotate(89deg);
+  }
+  48% {
+    transform: rotate(90deg);
+  }
+  60% {
+    transform: rotate(90deg) translateX(10px);
+  }
+  100% {
+    transform: rotate(90deg) translateX(10px);
+  }
+}
+body #wrap .can.dump:before {
+  transform: translateY(0px) rotate(-90deg);
+}
+body #wrap .can.dump .inner {
+  animation: rotate 1s ease-in-out 1 forwards;
+  transform-origin: right;
+}
+@keyframes rotate {
+  55% {
+    transform: rotateX(0deg);
+  }
+  60% {
+    transform: rotateX(35deg);
+  }
+  67% {
+    transform: rotateX(37.5deg) rotateY(5deg);
+  }
+  74% {
+    transform: rotateX(33.5deg) rotateY(5deg);
+  }
+  80% {
+    transform: rotateX(35deg) rotateY(5deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(7.4deg) rotate(-5deg);
+  }
+}
+body #wrap .can.dump .inner .face:nth-of-type(4) .back:before {
+  opacity: 0;
+}
+body #wrap .can .face {
+  position: absolute;
+  backface-visibility: hidden;
+}
+body #wrap .can .face .front, body #wrap .can .face .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  box-shadow: inset 0 0 0 1px #ccc;
+  backface-visibility: hidden;
+}
+body #wrap .can .face .back {
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px #000;
+  transform: rotateY(-180deg);
+}
+body #wrap .can .face:first-of-type {
+  width: 100%;
+  height: 100%;
+  bottom: -50px;
+  transform-origin: top;
+  transform: rotateX(90deg);
+}
+body #wrap .can .face:first-of-type .back {
+  background: #efefef;
+}
+body #wrap .can .face:first-of-type .back:before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: calc(50% - 20px);
+  right: 25px;
+  transform: rotate(90deg);
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/383755/throw-to-paper-bin.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+body #wrap .can .face:nth-of-type(2) {
+  width: 100%;
+  height: 100%;
+  top: -50px;
+  transform-origin: bottom;
+  transform: rotateX(-90deg);
+}
+body #wrap .can .face:nth-of-type(3) {
+  width: 100%;
+  height: 100%;
+}
+body #wrap .can .face:nth-of-type(4) {
+  width: 100%;
+  height: 100%;
+  transform: translateZ(50px) rotateX(-180deg);
+}
+body #wrap .can .face:nth-of-type(5) {
+  width: 50px;
+  height: 50px;
+  right: 0;
+  transform-origin: right;
+  transform: rotateY(90deg);
+}
+body #wrap .can .face:nth-of-type(5) .front {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #000;
+}
