@@ -24,3 +24,5 @@ git clone https://github.com/Terfno/fork_ShadySignup
 `name`と`…`のとこはよしなに変えてブラウザで開くと見えるよ。
 
 ### GitHub Pagesで…
+https://terfno.github.io/fork_ShadySignup/
+へアクセスしたら見えるようにしたよ。
