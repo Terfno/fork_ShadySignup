@@ -15,3 +15,4 @@ bundle exec ruby app.rb
 ```
 git clone https://github.com/Terfno/fork_ShadySignup && cd fork_ShadySignup && bundle instal --path vendor/bundle && bundle exec ruby app.rb
 ```
+で、`http://localhost:4567`にアクセス。
