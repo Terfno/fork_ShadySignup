@@ -11,3 +11,7 @@ cd fork_ShadySignup
 bundle instal --path vendor/bundle
 bundle exec ruby app.rb
 ```
+または
+```
+git clone https://github.com/Terfno/fork_ShadySignup && cd fork_ShadySignup && bundle instal --path vendor/bundle && bundle exec ruby app.rb
+```
