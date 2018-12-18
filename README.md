@@ -7,6 +7,7 @@ fork from https://codepen.io/anon/pen/LMRZGj
 
 ```
 git clone https://github.com/Terfno/fork_ShadySignup
+cd fork_ShadySignup
 bundle instal --path vendor/bundle
 bundle exec ruby app.rb
 ```
