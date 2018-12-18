@@ -7,7 +7,9 @@ fork from https://codepen.io/anon/pen/LMRZGj
 
 ## 現状
 `index.haml`と`style.scss`から`index.html`と`style.css`を作って、見えるようにした。
+
 codepenでも見えるよ。
+
 → https://codepen.io/cobra_winfrey/pen/VqvZKB
 
 別ブランチでsinatraの勉強も兼ねて頑張り中
